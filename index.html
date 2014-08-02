@@ -83,17 +83,22 @@
       var audio = document.getElementById("alarm");
       var defaultClass = container.className;
       var defaultTime = parseInt(box.innerHTML); // seconds
-      var time;
+      var time = defaultTime;
       var interval;
 
       button.onclick = function() {
-        this.innerHTML = "Reset";
-        audio.pause();
-        audio.currentTime = 0
-        time = defaultTime;
-        clearInterval(interval);
-        tick();
-        interval = setInterval(tick, 60000); // one minute
+        if (this.innerHTML.match(/Start/)) {
+          tick();
+          interval = setInterval(tick, 60000); // one minute
+          this.innerHTML = "Reset";
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+          time = defaultTime;
+          updateText(time);
+          clearInterval(interval);
+          this.innerHTML = "Start";
+        }
       };
 
       var tick = function() {
