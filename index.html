@@ -77,6 +77,8 @@
     </div>
 
     <script type="text/javascript">
+      var ONE_MINUTE = 60000;
+
       var container = document.getElementById("container");
       var button = document.getElementById("button");
       var box = document.getElementById("box");
@@ -89,7 +91,7 @@
       button.onclick = function() {
         if (this.innerHTML.match(/Start/)) {
           tick();
-          interval = setInterval(tick, 60000); // one minute
+          interval = setInterval(tick, ONE_MINUTE);
           this.innerHTML = "Reset";
         } else {
           audio.pause();
